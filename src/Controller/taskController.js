@@ -31,7 +31,12 @@ const addTask = async (req, res, next) => {
  */
 const getTask = async (req, res, next) => {
   try {
+    const id = req.query.id;
     const email = req.params.email;
+    if (id) {
+      const result = await Task.findById(id);
+      return res.status(200).json(result);
+    }
     const result = await Task.find({ email, trash: false });
     res.status(200).json(result);
   } catch (error) {
