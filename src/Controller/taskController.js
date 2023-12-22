@@ -39,7 +39,21 @@ const getTask = async (req, res, next) => {
   }
 };
 
+/**
+ * delete a task using id
+ */
+const delTask = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const result = await Task.findByIdAndDelete(id);
+    res.status(202).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   addTask,
   getTask,
+  delTask,
 };
