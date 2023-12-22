@@ -11,7 +11,7 @@ const cors = require('cors');
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://epoch-tasks.web.app',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   })
@@ -23,6 +23,9 @@ app.use(routes);
 app.use(globalError);
 
 app.get('/health', (req, res) => {
+  res.json({ message: 'Api health is fine' });
+});
+app.get('/', (req, res) => {
   res.json({ message: 'Api health is fine' });
 });
 
