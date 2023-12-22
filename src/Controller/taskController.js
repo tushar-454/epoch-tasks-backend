@@ -46,7 +46,25 @@ const delTask = async (req, res, next) => {
   try {
     const id = req.params.id;
     const result = await Task.findByIdAndDelete(id);
-    res.status(202).json(result);
+    res.status(202).json({ message: 'success' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * trash a task using the id
+ * this is a post method change a trash property value
+ */
+const trashTask = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const trashStatus = req.body.trashStatus;
+    const result = await Task.findOneAndUpdate(
+      { _id: new Object(id) },
+      { trash: trashStatus }
+    );
+    res.status(200).json({ message: 'success' });
   } catch (error) {
     next(error);
   }
@@ -56,4 +74,5 @@ module.exports = {
   addTask,
   getTask,
   delTask,
+  trashTask,
 };
