@@ -19,7 +19,7 @@ const addTask = async (req, res, next) => {
       trash: false,
     });
     const result = await createTask.save();
-    res.status(201).json({ message: 'success', data: result });
+    res.status(201).json({ message: 'success' });
   } catch (error) {
     next(error);
   }
@@ -32,7 +32,7 @@ const addTask = async (req, res, next) => {
 const getTask = async (req, res, next) => {
   try {
     const email = req.params.email;
-    const result = await Task.find({ email });
+    const result = await Task.find({ email, trash: false });
     res.status(200).json(result);
   } catch (error) {
     next(error);
@@ -118,14 +118,15 @@ const handleStatusTask = async (req, res, next) => {
  */
 const specificTask = async (req, res, next) => {
   try {
+    const email = req.params.email;
     const { property, value } = req.query;
     if (property === 'trash') {
-      const result = await Task.find({ trash: !!value });
+      const result = await Task.find({ trash: !!value, email });
       res.status(200).json(result);
       return;
     }
     if (property === 'status') {
-      const result = await Task.find({ status: value });
+      const result = await Task.find({ status: value, email });
       res.status(200).json(result);
       return;
     }
