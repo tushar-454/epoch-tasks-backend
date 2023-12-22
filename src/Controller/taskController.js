@@ -119,15 +119,17 @@ const handleStatusTask = async (req, res, next) => {
 const specificTask = async (req, res, next) => {
   try {
     const { property, value } = req.query;
-    const query = {};
     if (property === 'trash') {
-      query.trash = !!value;
+      const result = await Task.find({ trash: !!value });
+      res.status(200).json(result);
+      return;
     }
     if (property === 'status') {
-      query.status = value;
+      const result = await Task.find({ status: value });
+      res.status(200).json(result);
+      return;
     }
-    const result = await Task.find(query);
-    res.status(200).json(result);
+    res.status(200).json({ message: 'success', data: [] });
   } catch (error) {
     next(error);
   }
