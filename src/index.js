@@ -3,6 +3,7 @@ const app = express();
 require('dotenv').config();
 const port = process.env.PORT || 4000;
 const ConnectDB = require('./Database/db');
+const routes = require('./Routes');
 const globalError = require('./Error/globalError');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -16,6 +17,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
+app.use(routes);
 app.use(globalError);
 
 app.get('/health', (req, res) => {
