@@ -5,6 +5,7 @@ const tashSchema = new Schema({
   description: { type: String, require: true },
   deadline: { type: String, require: true },
   priroty: { type: String, require: true },
+  email: { type: String, require: true },
   createAt: { type: String, require: true },
   status: { type: String, require: true },
   trash: { type: Boolean, require: true },

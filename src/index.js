@@ -5,6 +5,7 @@ const port = process.env.PORT || 4000;
 const ConnectDB = require('./Database/db');
 const routes = require('./Routes');
 const globalError = require('./Error/globalError');
+const logger = require('./Middleware/logger');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
@@ -17,6 +18,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
+app.use(logger);
 app.use(routes);
 app.use(globalError);
 
