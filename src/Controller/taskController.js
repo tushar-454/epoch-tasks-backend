@@ -112,6 +112,27 @@ const handleStatusTask = async (req, res, next) => {
   }
 };
 
+/**
+ * get some specific task by property value
+ * here based on property we get all trash task or all completed task
+ */
+const specificTask = async (req, res, next) => {
+  try {
+    const { property, value } = req.query;
+    const query = {};
+    if (property === 'trash') {
+      query.trash = !!value;
+    }
+    if (property === 'status') {
+      query.status = value;
+    }
+    const result = await Task.find(query);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   addTask,
   getTask,
@@ -119,4 +140,5 @@ module.exports = {
   trashTask,
   updateTask,
   handleStatusTask,
+  specificTask,
 };
