@@ -94,10 +94,29 @@ const updateTask = async (req, res, next) => {
   }
 };
 
+/**
+ * this a task status change api
+ * call this api doing a task todo to ongoing or todo to completed and more
+ */
+const handleStatusTask = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const status = req.body.status;
+    const result = await Task.findOneAndUpdate(
+      { _id: new Object(id) },
+      { status }
+    );
+    res.status(200).json({ message: 'success' });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   addTask,
   getTask,
   delTask,
   trashTask,
   updateTask,
+  handleStatusTask,
 };
