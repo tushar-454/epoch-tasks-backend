@@ -7,6 +7,7 @@ const tashSchema = new Schema({
   priroty: { type: String, require: true },
   email: { type: String, require: true },
   createAt: { type: String, require: true },
+  completedAt: { type: String, require: true },
   status: { type: String, require: true },
   trash: { type: Boolean, require: true },
 });

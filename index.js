@@ -11,7 +11,7 @@ const cors = require('cors');
 
 app.use(
   cors({
-    origin: 'https://epoch-tasks.web.app',
+    origin: ['https://epoch-tasks.web.app', 'http://localhost:5173'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   })
